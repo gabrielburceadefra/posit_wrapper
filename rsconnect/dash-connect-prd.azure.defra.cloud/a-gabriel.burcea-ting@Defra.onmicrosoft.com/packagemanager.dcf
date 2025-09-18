@@ -1,0 +1,12 @@
+name: packagemanager
+title: packagemanager
+username: a-gabriel.burcea-ting@Defra.onmicrosoft.com
+account: a-gabriel.burcea-ting@Defra.onmicrosoft.com
+server: dash-connect-prd.azure.defra.cloud
+hostUrl: https://dash-connect-prd.azure.defra.cloud/__api__
+appId: 15
+bundleId: 16
+url: https://dash-connect-prd.azure.defra.cloud/content/62792dd9-fb06-44d9-b4b7-34974a604262/
+version: 1
+asMultiple: FALSE
+asStatic: TRUE

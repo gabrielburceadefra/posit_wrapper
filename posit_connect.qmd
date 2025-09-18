@@ -1,0 +1,993 @@
+# Posit Connect Server {#posit-chapter}
+
+The Posit Connect server enables data scientists to deploy content to co-developers and the wider Defra Group. Connect supports a range of data products including:
+
+-   Applications - [R Shiny](https://docs.rstudio.com/connect/user/shiny/), [Dash](https://docs.rstudio.com/connect/user/dash/), [Streamlit](https://docs.rstudio.com/connect/user/streamlit/), and [Bokeh](https://docs.rstudio.com/connect/user/bokeh/)
+-   Documents - [R Markdown](https://docs.rstudio.com/connect/user/rmarkdown/),[Quarto](https://docs.rstudio.com/connect/user/quarto/),[Jupyter Notebooks](https://docs.rstudio.com/connect/user/jupyter-notebook/)
+-   APIs - [Plummer](https://docs.rstudio.com/connect/user/plumber/), [Flask](https://docs.rstudio.com/connect/user/flask/)
+-   [Pins](https://pins.rstudio.com/) (i.e., small data items \<500 MB) - [R](https://docs.rstudio.com/connect/user/pins/), and [Python](https://docs.rstudio.com/connect/user/python-pins/)
+
+You can also access files to use in applications published through the Databricks API.
+
+See more information and documentation in the [Posit Connect User Guide](https://docs.posit.co/connect/user/).
+
+## Tutorials
+
+### How to access Posit Connect
+
+Access the Posit Connect server [here](https://dash-connect-prd.azure.defra.cloud/connect/#/welcome) to login. When asked to log in with your PAM credentials, use your Defra Windows details. Login is done using Single Sign On (SSO). This is a feature that allows users to access the platform using their existing DEFRA login credentials, unlike previous way of needing a separate username and password for Connect.
+
+```{r, echo=FALSE, out.width="100%", fig.cap="Posit login screen"}
+knitr::include_graphics("./images/positlogin.png")
+```
+
+Logging in is important so you can be assigned permissions for restricted content. Until you have logged in for first time, it won't be possible for creators to assign you access to relevant dashboards.
+
+### Sharing content
+
+DASH users or DASH content viewers will be given a log in for the Posit connect application.
+
+Individual dashboards can be set to be viewed by:
+
+-   "Anyone, no login required" -- This includes anyone within the Defra firewall and all users that have been on-boarded onto DASH.
+
+Users from Core Defra, Environment Agency (EA), Joint Nature Conservation Committee (JNCC), Marine Management Organisation (MMO), Natural England (NE), and Rural Payments Agency (RPA) can view Posit Connect dashboards via their own Defra devices.
+
+Non-core Defra users will only be able to view Posit Connect dashboards via a [DASH AVD (Azure Virtual Desktop)](#avd).
+
+-   "All users - login required"
+
+-   "Specific users groups"
+
+Publishers can share a URL with users to view specific content. To enable a Publisher to give access to a specific user, that user must have previously logged onto the server at least once.
+
+Instruction on using a dashboard itself is the responsibility of the dashboard owners.
+
+### User roles
+
+Posit server users can be "Administrators", "Publishers" or "Viewers".
+
+**Administrators**\
+Instructions for the Administrators role is beyond the scope of this document.
+
+**Publishers**\
+Able to publish content to be hosted onto the server. They can also select access options for published content.
+
+DASH users are given publishing access on request.\
+
+If you would like to be upgraded from Viewer to Publisher, please email [dashplatformsupport\@defra.gov.uk](mailto:dashplatformsupport@defra.gov.uk) with:\
+
+> Subject: Request Publisher access to Posit Server
+
+Include your Defra (or ALB) email address in the message body.
+
+**Viewers**\
+Able to view and use the published content. DASH users are given Viewer access by default.
+
+Viewers should request access through a MyIT request.
+
+### Publishing
+
+::: callout-important
+Please ensure any data published to RStudio connect is only accessible to users who should have access to that data.
+
+For data in the data lake, please refer to the [Data Catalogue](https://defra.sharepoint.com/:x:/r/teams/Team552/_layouts/15/Doc.aspx?sourcedoc=%7B7C345456-E15C-4F47-B474-985D0AAE7F14%7D&file=CDAP%20Data%20Catalogue.xlsx&action=default&mobileredirect=true&CID=5fb4ba14-9dba-bd28-e5ad-ea43a9441490&isSPOFile=1&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yMzExMDIzMTgxMCIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D) for restrictions.
+:::
+
+#### Publishing from RStudio
+
+Shiny dashboards as well as R Markdown and bookdown files can be published directly from RStudio server.\
+The below process will use the example Shiny dashboard in RStudio. The same process would be followed for other types of files to be published.
+
+There is a 2GB limit to the size of dashboards that can be published on the Posit server.
+
+First access RStudio from Dash Platform on Databricks / Workbench (here is the link for new server where RStudio sits - <https://dash-workbench-prd.azure.defra.cloud/> - which will replace the RStudio within Databricks).
+
+On Workbench choose RStudio Pro, and check the Session Credential tab if you read data from Databricks.
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_2a.png", dpi = NA)
+```
+
+##### Create a Dasboard
+
+Drop down File -\> Choose Shiny Web App
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_1.png", dpi = NA)
+
+```
+
+From this give the dashboard a name and click **Create**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_1a.png", dpi = NA)
+
+```
+
+##### Connect to Posit server
+
+Next go to the top right of the window and click **Publish Application**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_2aa.png", dpi = NA)
+
+```
+
+If you haven't already connected to RStudio Connect then a window will pop up prompting you to connect. Click **Next** on this window
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_3.png", dpi = NA)
+
+```
+
+Click **Posit Connect**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_4.png", dpi = NA)
+
+```
+
+Enter this URL into the box: <https://dash-connect-prd.azure.defra.cloud/> and click **Next**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_5.png", dpi = NA)
+
+```
+
+Another window will pop up prompting you to connect to R. Click on **Connect**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_6.png", dpi = NA)
+```
+
+Another window will pop up saying 'Connection succeeded'. Close this window
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_7.png", dpi = NA)
+
+```
+
+On the next window click **Connect Account**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_8.png", dpi = NA)
+
+```
+
+##### Publish Dashboard
+
+You''ll be able to see now that you can publish from your account as this was set it for you. Now click **Publish.** If this screen appears just click **Try Again.**
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_9.png", dpi = NA)
+
+```
+
+Navigate on the Connect server [HERE](https://dash-connect-prd.azure.defra.cloud/) where you will have your dashboard displayed.
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_10.png", dpi = NA)
+
+```
+
+By default a newly published dashboard can only be accessed by the publisher.\
+Please view the Dashboard admin to set access rights as seen in the picture.
+
+```{r, echo = FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/rdashboard_11.png", dpi = NA)
+```
+
+#### Publishing from Python
+
+This guide will walk through how to publish a dashboard onto the Posit Connect (Formerly RSConnect) server. This is currently supported from Azure Virtual Desktops. Whilst I focus on running commands from VS Code terminal from Workbench, I would also add extra commands that are necessary when working with VS Code as a standalone, from AVD which I marked them separately. The steps bellow would also work for JupyterLab when publishing from terminal.
+
+::: callout-warning
+Be aware **JupyterLab isn't configured with Databricks.** I **strongly advice publishing your Python apps from VS Code if you have data that is read from Databricks**.
+:::
+
+**Activate the virtual env** if you work with virtual environment. I strongly advice to work with virtual environment - for more info check - [Virtual Environment with Python](https://docs.python.org/3/library/venv.html) . For the sake of showcasing I will create my virtual environment with this code
+
+``` python
+python3 -m venv venv
+```
+
+Then activate your virtual environment named venv.
+
+``` python
+source venv/bin/activate
+```
+
+There are a range of different ways to publish to the Posit server including Plotly DASH, Streamlit and Bokeh, Shiny, etc. There is a 2GB limit to the size of dashboards that can be published on the Posit Connect server.
+
+::: panel-tabset
+## Ploty DASH
+
+Ploty DASH is a python package for creating dashboards. To install DASH, run the following command in the command prompt:
+
+```         
+pip install dash
+```
+
+## Shiny for Python
+
+Shiny for Python is a powerful web application framework for building interactive data visualizations, dashboards, and applications using Python. To install shiny run the following command in the command prompt:
+
+``` python
+pip install shiny
+```
+
+## Streamlit
+
+Streamlit is a python package that makes it easy to build dashboards and custom web applications. To install Streamlit, run the following command in the command prompt:
+
+```         
+pip install streamlit
+```
+
+## Bokeh
+
+Bokeh is an interactive visualization library which allows the construction of versatile graphics, and affords high-performance interactivity over large or streaming datasets. To install Bokeh, run the following command in the command prompt:
+
+```         
+pip install bokeh
+```
+
+## Voila
+
+Voilà allows you to convert a Jupyter Notebook into an interactive dashboard that allows you to share your work with others.
+
+``` python
+pip install voila
+```
+
+## Notebook
+
+Jupyter notebooks can indeed also be published on Connect. Check for more information to the link - [How to publish a jupyter notebook](https://docs.posit.co/connect/how-to/publish-jupyter-notebook/){.uri} . But to install jupyter notebooks run the following command in the command prompt:
+
+``` python
+pip install rsconnect_jupyter
+```
+
+## Quarto
+
+Quarto allows you to interweave executable Python code with markdown to create dynamic documents, reports, websites, and presentations. Quarto provides a fully reproducible and flexible workflow for Python users
+
+``` python
+pip install quarto
+```
+:::
+
+## Installing rsconnect
+
+You will have to install "rsconnect" to publish a dashboard.
+
+``` python
+pip install rsconnect
+```
+
+::: callout-caution
+This is only for IDE's outside of Workbench (e.g. standalone Visual Code in AVD)
+
+**Note: these next steps aren't needed for any IDE in Workbench**
+
+To run rsconnect outwith it's location:
+
+``` python
+set NEWPATH=C:\Users\XXXXXXXX\AppData\Roaming\Python\Python310\Scripts\
+```
+
+Replacing the X's with your system username. This is usually your employee number.
+
+Then:
+
+``` python
+set PATH=%PATH%;%NEWPATH%
+```
+
+**Note: You will have to run both set commands above every time you close and reopen the command prompt.**
+:::
+
+##### API key
+
+Log onto the Posit server with this link: <https://dash-connect-prd.azure.defra.cloud/>
+
+Enter your credentials.\
+Click on your name and select API Keys from the menu bar that appears on the right hand side.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/posit1.png", dpi = NA)
+```
+
+Click on "+ new api key"
+
+```{r, echo = FALSE, out.width = '100%'}
+knitr::include_graphics("images/posit2.png", dpi = NA)
+```
+
+Give it a name in the text box that pops up.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/posit3.png", dpi = NA)
+```
+
+The second pop up gives you the chance to copy the 32 character alphanumeric code. Save this somewhere (for example in notepad) as you will require it later to publish and can be used for subsequent dashboards.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/posit4.png", dpi = NA)
+```
+
+##### Add API key to rsconnect
+
+To configure the rsconnect package for the server:
+
+```         
+rsconnect add   --server https://dash-connect-prd.azure.defra.cloud/ --name \<name> --api-key XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+```
+
+Where \<name\> is of your choice of the dashboard name and the X's are replaced with your own API key.
+
+##### Deploy Dashboards
+
+::: panel-tabset
+## Plotly DASH
+
+Navigate to the folder that contains the folder that your dashboard files are located. For example if your dashboard files are contained within Workbench, then, the open the terminal in the VS Code / JupyterLab and navigate to the dash_app folder. Or if you are within *\~/Desktop/dash_app/* then navigate to the */Desktop* folder. Then run the bellow command in the command line:
+
+```         
+rsconnect deploy dash -n \<name> \<foldername>
+```
+
+Where \<name\> is replaced with the name you chose in the previous step, and \<foldername\> is the name of the folder containing you dashboard files.
+
+In my case this is how it looks when running the above command for publishing dash app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/dash.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added my api key** retrieved from Connect under my profile and **deployed the app onto the server** onto Posit Server.
+
+## Shiny for Python
+
+Navigate to the folder that contains the folder that your shiny dashboard files are located. For example is your dashboard files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to shiny_app folder. Or if you are within \~/Desktop/shiny_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+``` pyth
+rsconnect deploy shiny -n \<name> \<foldername>
+```
+
+Where \<name\> is replaced with the name you choose in the previous step, and \<foldername\> is the name of the folder containing your dashboard files. In my case this is how it looks when running the above command for publishing shiny python app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/shiny_python_connect.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app onto the server** onto Posit Server.
+
+## Streamlit
+
+Navigate to the folder that contains the folder that your dashboard files are located. For example is your dashboard files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to streamlit_app folder. Or if you are within \~/Desktop/streamlit_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+```         
+rsconnect deploy streamlit -n \<name> --entrypoint example.py <foldername>
+```
+
+Where \<name\> is replaced with the name you chose in the previous step, \<foldername\> is the name of the folder containing you dashboard files and example.py is the name of the python file containing your streamlit code.
+
+In my case this is how it looks when running the above command for publishing streamlit app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/streamlit_connect.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app** onto Connect server**.**
+
+## Bokeh
+
+Navigate to the folder that contains the folder that your dashboard files are located. For example is your dashboard files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to bokeh_app folder. Or if you are within \~/Desktop/bokey_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+```         
+rsconnect deploy bokeh -n \<name> --entrypoint example.py <foldername>
+```
+
+Where \<name\> is replaced with the name you chose in the previous step, \<foldername\> is the name of the folder containing you dashboard files and example.py is the name of the python file containing your bokeh code.
+
+In my case this is how it looks when running the above command for publishing bokeh app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/bokeh_connect.png", dpi = NA)
+```
+
+Test As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app** onto Connect server**.**
+
+## Voila
+
+Navigate to the folder that contains the folder that your dashboard files are located. For example is your dashboard files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to voila_app folder. Or if you are within \~/Desktop/voila_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+``` python
+rsconnect deploy voila -n <name> <foldername>
+```
+
+Where \<name\> is replaced with the name you chose in the previous step, \<foldername\> is the name of the folder containing you dashboard files and example.py is the name of the python file containing your bokeh code.
+
+In my case this is how it looks when running the above command for publishing bokeh app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/voila_connect.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app** onto Connect server**.**
+
+## Notebook
+
+Navigate to the folder that contains the folder that your jupyter notebook files are located. For example is your jupyter notebook files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to the folder where the notebook is. Or if you are within \~/Desktop/jupyter_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+``` python
+rsconnect deploy notebook -n my_key ./name-of-the-jupyter_notebook.ipynb
+```
+
+Where \<name-of-the-jupyter_notebook\> is replaced with the name of your actual notebook.
+
+In my case this is how it looks when running the above command for publishing bokeh app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/jupyter_notebook_connect.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app** onto Connect server**.**
+
+## Quarto
+
+Navigate to the folder that contains the folder that your quarto files are located. For example is your quarto dashboard files are located within Workbench, then open the terminal in VS Code /JupyterLab and navigate to quarto_app folder. Or if you are within \~/Desktop/quarto_app/ then navigate to the /Desktop folder.Then run the bellow command in the command line:
+
+``` python
+rsconnect deploy voila -n <name> <foldername>
+```
+
+Where \<name\> is replaced with the name you chose in the previous step, \<foldername\> is the name of the folder containing you dashboard files and example.py is the name of the python file containing your bokeh code.
+
+In my case this is how it looks when running the above command for publishing bokeh app:
+
+```{r, echo = FALSE, out.width = '200%'}
+knitr::include_graphics("images/quarto_connect.png", dpi = NA)
+```
+
+As you can see I have firstly **activated my virtual env**, then went into the actual folder using **cd** command. Installed all the needed libraries my app is dependent on with **pip install**. Then **added the url link** <https://dash-connect-prd.azure.defra.cloud/> **and my api key** retrieved from Connect under my profile and **deployed the app** onto Connect server**.**
+:::
+
+##### Shiny in Python (within RStudio IDE)
+
+Another way to publish your dashboard to the Posit server is via Shiny in Python, within RStudio. Shiny for Python is a web application framework for Python.
+
+**Note:** When publishing a dashboard using Shiny in Python with RStudio, you need to use the command line tool as RStudio does not give you the publish button like it does when you have an RShiny app open.
+
+The steps to deploy are the same as the methods listed above. In the command line, you need to install `rsconnect`, set both `PATH` and `NEWPATH` variables, create an API key on Posit, add the API key to `rsconnect` and then deploy by running the following command:
+
+```         
+rsconnect deploy shiny -n \<name> \<foldername>
+```
+
+#### Publish Jupyter Notebooks (within AVD only)
+
+Jupyter notebooks are very similar to Databricks notebooks. You can export a Databrick notebook to the jupyter notebook format. The file will have a .ipyn file extension.\
+Although Jupyter can be installed on AVD. There is a version of rsconnect that can publish jupyter notebooks. There is also a plug in extension for jupyter notebooks that makes publishing very easy.
+
+##### Install requirements
+
+Open a command prompt
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/pubnote1.png", dpi = NA)
+```
+
+Run the following command:
+
+```         
+pip install notebook rsconnect_jupyter jupyter_contrib_nbextensions
+```
+
+##### Setting path to Python scripts
+
+Again in the command prompt:
+
+```         
+echo %USERNAME%
+```
+
+This gives your username to replace <USERNAME> in the following:
+
+```         
+set NEWPATH=C:\Users\<USERNAME>\AppData\Roaming\Python\Python310\Scripts
+set PATH=%PATH%;%NEWPATH%
+```
+
+##### Set up Jupyter extensions
+
+Still in the command prompt:
+
+```         
+jupyter contrib nbextension install --user
+jupyter nbextension enable varInspector/main
+jupyter-nbextension install --py rsconnect_jupyter --user
+jupyter-nbextension enable --py rsconnect_jupyter
+jupyter-serverextension enable --py rsconnect_jupyter
+jupyter notebook
+```
+
+The last command will open Jupyter in a browser.
+
+##### Opening/creating notebooks
+
+Jupyter will open at the root of the AVD drive.
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote2.png", dpi = NA)
+```
+
+Browse to where you saved your .ipyn file and open it. Or if testing, open a new notebook and ether add some code or copy this example into the first cell and run it. You can also rename the new notebook by clicking on the default "Untitled" name.
+
+```         
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = {'a': np.arange(50),
+        'c': np.random.randint(0, 50, 50),
+        'd': np.random.randn(50)}
+data['b'] = data['a'] + 10 * np.random.randn(50)
+data['d'] = np.abs(data['d']) * 100
+
+plt.scatter('a', 'b', c='c', s='d', data=data)
+plt.xlabel('entry a')
+plt.ylabel('entry b')
+plt.show()
+```
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote3.png", dpi = NA)
+```
+
+##### Deploying Notebook
+
+Before you publish a jupyter notebook, you will need to have previously logged into the DASH Connect server on the AVD.
+
+Click on the button with the blue symbol to the right of the windows decorations and select "Publish to Posit Connect".
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote4.png", dpi = NA)
+```
+
+In the pop up window:
+
+Server Address\
+<https://dash-connect-prd.azure.defra.cloud/>
+
+API key
+
+Add you own API key created in the Posit server as shown in the Publishing Python guide.
+
+Server Name\
+Add a nickname of your choice.
+
+Click the "Add Server" button.
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote5.png", dpi = NA)
+```
+
+In the next pop up window you can edit the Tile if you wish and select the option that you prefer. Remember to add any additional files the notebook requires.
+
+Click the "Publish" button.
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote6.png", dpi = NA)
+```
+
+In the next pop up window select the radio button and click "Next". This will return you to the previos window, click "Publish" again. You will see some output at the bottom of the windows and it will disappear once complete.
+
+##### View notebook on the Posit server
+
+Now when you log into the Posit server and click on the content tab you will see your notebook listed. Click on it and select the access settings you require. See the dashboard admin guide.
+
+```{r, echo = FALSE, out.width = '80%'}
+knitr::include_graphics("images/pubnote7.png", dpi = NA)
+```
+
+## Administration
+
+The Posit Connect server has been deployed on a Virtual Machine (VM) within the DASH Platform. It enables users to set the visibility of content to either:
+
+### Default settings
+
+When you access your dashboard for the first time, the settings on the right hand side are open on the "Access" tab. You can see that the radio buttons under "SHARING" as set to "Specific users or groups". Under this in the "Who can view or change this Site" section is your own account name. This means that only you can view your dashboard.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/positadmin1.png", dpi = NA)
+```
+
+### Setting dashboard access
+
+The access radio buttons give three options:
+
+1.  Anyone can access no login required. -- Since the DASH Platform is restricted to Defra group IP this will release content to anyone working on the Defra Group IP. (No Posit Connect account required)
+2.  All users -- This will allow anyone with a RStudio Connect log in to view the content.
+3.  Only specified RStudio connect users -- This releases content to specified RStudio Connect users. You can set the list of users that are able to access the dashboard. The users must have been on the server previously for their username (email address) to appear.
+
+If you require restricted content access for non-DASH users e.g. senior leadership, please plan well in advance for this. When licences are no longer required please raise an issue in the DASH issue tracker (see the [support](support.html) section) to request these licences be revoked and returned to the pool for other users.
+
+Do not forget to click on the "save" pop up near the top of the side menu.
+
+### Collaboration
+
+Users can be set as viewers or collaborators. Collaborators are able to update the dashboard. For a collaborator to successfully update a posit app, the original publisher must include the rsconnect connect folder (that includes a .json file) in GitHub tracking. Further details can be found here: [Dashboard collaboration](https://docs.posit.co/connect/user/publishing-rstudio/#publishing-collaboration)
+
+### Collaboration on Python (VS Code)
+
+#### Main User
+
+1.  Publish to Posit via Python method.
+2.  After publishing for the first time, this creates a `rsconnect` folder in your project. This stores deployment-related metadata and configuration for applications that are developed.
+3.  Commit and push these changes to the GitHub repo.
+4.  In Posit, under **SHARING**, add your collaborators by their email address and switch their access from ‘Viewer’ to ‘Collaborator’ in the bar on the right-hand side. Click save.
+5.  Publish project to GitHub and ensure that they also have access to the GitHub project.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/posit_collab_1.png", dpi = NA)
+```
+
+#### Collaborator
+
+1.  Check that the GitHub repo contains a rsconnect folder.
+2.  Clone the GitHub project into RStudio.
+3.  Check that the name of the parent folder is the same as the original.
+4.  Work on the project as normal and when publishing this should update the existing Posit app.
+
+### Collaboration on RStudio
+
+#### Main User
+
+1.  Publish the RShiny app to Posit via R method.
+2.  After publishing for the first time, this creates a `rsconnect` folder in your project.
+3.  Commit and push these changes to the GitHub repo.
+4.  On Posit, under **SHARING**, add your collaborators by their email address and switch their access from ‘Viewer’ to ‘Collaborator’. Click save.
+5.  Ensure that they also have access to the GitHub project.
+
+#### Collaborator
+
+1.  Check that the GitHub repo contains a rsconnect folder.
+2.  Clone the GitHub project into RStudio.
+3.  Work on the project as normal and when publishing this should update the existing Posit app.
+
+### Set a vanity URL
+
+On the same menu bar you can also set a vanity URL. This gives a friendlier address to share. In the text box type the name you want to be the extension of the URL.
+
+EG Typing "myfirstdash" will give a URL to reach the dashboard of <https://dash-connect-prd.azure.defra.cloud/>/myfirstdash
+
+Again do not forget to click on the save popup.
+
+There is also a "copy me" button to put the new URL in you clipboard ready to be pasted and shared.
+
+### Setting Environmental Vairables
+
+Environmental variables to be used by the published content can be set in "Vars" tab in the settings menu.
+
+```{r, echo = FALSE, out.width = '50%'}
+knitr::include_graphics("images/positenvs.png", dpi = NA)
+```
+
+## Posit API
+
+The [Posit API](https://docs.posit.co/connect/api/) can be used to perform actions on the Posit Connect server remotely. Eg Databricks, AVD or Laptop. It can also be used within a published application for example to display useage statisics or set user access.
+
+The API can be use with your API package of choice. eg BASH - curl, Python - Request or R - httr/httr2. However, you may find it easier to use the [posit-sdk](https://github.com/posit-dev/posit-sdk-py/) package for Python and [connectapi](https://posit-dev.github.io/connectapi/) package for R.
+
+To use the API you have to give the package both the URL of the Posit Connect server url and your own API key. These can be hard coded but for security it is advised to set environmental variables for both.
+
+eg.
+
+CONNECT_SERVER = 'https://dap-prd2-connect.azure.defra.cloud/' (Our server)\
+CONNECT_API_KEY = '\*\*\*\*\*\*\*\*\*\*\*07Xs' (Not an active API Key)
+
+## FAQs
+
+### Dashboard fails to run locally
+
+Training for Shiny and Plotly is available on Datacamp.\
+General advice for dashboard development is to start small and build up, testing regularly.\
+Check online sources such as stackoverflow for solutions.\
+Try posting in the Data-science-Defra-community teams group.
+
+There are limits to the direct support the DASH team can give. Please do not expect us to fix the code of a broken dashboard.
+
+### Dashboard fails to run on DASH
+
+If you believe the dashboard is failing to run due to the DASH environment raise a ticket on the Dash Platform Resolution tracker.\
+Please include a full description of the problem, troubleshooting steps taken and attach relevant files. That could be screenshots (or from snip tool), code or error text.
+
+### Dashboard fails to publish
+
+If your dashboard is working locally or on DASH but fails to deploy to the Posit server, try these steps:
+
+-   Check deployment logs to determine at what point it fails. You may have to scroll up through them to find the first point of failure. Include the full deployment log with any support request.
+-   Use a minimal working dashboard (eg the hello world examples). However, include the packages that you require to import for the more complex dashboard. The posit server will attempt to recreate your environment. This will eliminate any code problems and make the problem easier to try to replicate by support.
+-   Remove any package indicated as failure point in deployment log. If this is not clear, add/remove packages until you can determine the package causing the problem.
+-   Try updating a failing package, and it dependencies. This could also be packages required to compile packages. eg Rcpp
+
+### Dashboard published but fails to run on the Posit server
+
+If a dashboard deployment appears to work but fails to run on the server.
+
+-   Check to see you are changing the working directory in your code.
+-   Try commenting out access to data or other files in the code. eg loading csv files, API requests or even images.
+
+Futher troubleshooting can be found on the Posit website [troubleshooting website](https://docs.posit.co/connect/user/troubleshooting/).
+
+### Unable to asign Dashboard to user that has been given access to the Posit server
+
+Users given access to the Posit server must log in at least once before there account will be created and dashboard access granted by publishers.
+
+### Users unable to log into Posit server after first log in.
+
+The Posit server creates a username from the email address you entered on first log in. This is not case sensitive however all subsequent then become case sensitive. In other words, your email/username must be entered with the same capitalisation as the first time. We suggest using all lowercase.
+
+### Viewing the dashboard on Posit
+
+Return to the Posit server: <https://dash-connect-prd.azure.defra.cloud/>
+
+Click on "Content" on the left hand side. You should see your dashboard in the list named as you chose and your username under Author. Click on it and you will see your dashboard.
+
+Please see the tutorial on dashboard admin to apply settings to your dashboard.
+
+## Migration of Apps from old Posit Connect to New Posit Connect
+
+The present guideline purpose is to aide the migration of R & Python projects from old RStudio / VSCode (on Databricks) or other IDE's used, to new RStudio VSCode within Workbench.
+
+### Methods for migration of apps
+
+There are several methods to migrate your app from old Connect to the new Connect.
+
+I will add summary of the migration approaches. But it is important to read in detail bellow what entails each method. That way you won't face any issues in the process of migration.
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/summary_table_migration.png") 
+```
+
+Decision tree helps you with choosing which migration fits your need.
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/decision_tree_migration.png") 
+```
+
+#### Method A: Direct Deployment from IDE
+
+**From RStudio in Databricks and Python VS Code publishing onto new Connect**. See section bellow on relevant steps 13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python. I would suggest you should go with this method first unless you also want to used the Method D - migrate the entire project onto Workbench and then migrating your app onto new Connect.
+
+#### Method B - Github URL link
+
+**Using Github URL link** to publish onto Connect; this has the advantage of not needing to open any R / Python and IDE. See section **13.5.3 Migration of apps using Github url link**
+
+::: callout-caution
+This method implies you have manifest.json already pushed to Github. For more see Step 8 from section **13.5.3 Migration of apps using Github url link**
+:::
+
+#### Method C - Download - Upload bundle
+
+And last method, **downloading the bundle from old Connect, then uploading it onto any IDE (RStudio/VS Code) or Workbench** followed by steps recorded at sections 13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python. The advantage of this method is that if your project isn't any more onto your local environment then you can reproduce the same environment within the choice of your IDE.
+
+a)  ::: callout-note
+    My advice is **upload the bundle straight into Workbench**, either within RStudio or VS Code and download all the needed libraries and versions of the app. Test the app works the way is intended and then migrate it.
+    :::
+
+    ::: callout-caution
+    If you app is based on updated data in Databricks, **VS Code on Workbench is the perfect IDE to be used in this instance. JupyterLab isn't configured with Databricks.**
+    :::
+
+### 
+
+#### Method D: Project migration on Workbench -\> Actual migration
+
+**Using Workbench.** This method requires **first a transfer of the whole app project** onto Workbench - see steps here **18.8 Migration of projects to Workbench**. After migrating your app to Workbench then follow the migration just as documented at sections **13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python**. This method advantage is you have all your your files transferred (alongside migration task) onto Workbench which is the new server from now onwards.
+
+### Assumptions
+
+1.  Depending on the migration method you choose, Dash users might need to have a Defra github account.The project should be added opened within - <https://github.com/Defra-Data-Science-Centre-of-Excellence> repository.
+
+2.  If you choose the last method of migration, then at the point of migration make sure you have access to the new workbench (the new link <https://dash-workbench-dev.azure.defra.cloud)> where multiple IDE's are sitting, including RStudio/ VSCode / JupyterLab.
+
+3.  Users need to be within AVD to be able to undertake the tasks needed for deployment.
+
+4.  Within the Posit Workbench make sure you select the R & Python versions as the same as within the original environment. Otherwise, the code has to be re-factored with the newer versions of R provided. The same applies to Python and Quarto.
+
+::: callout-note
+The versions of each software in the new environment are:
+
+-   R = "4.4.2" "4.4.0" "4.3.2" "4.2.2"
+
+-   Python = "3.12.3" "3.11.11" "3.10.12"
+
+-   Quarto ="1.7.31" "1.6.42" "1.5.54"
+:::
+
+5.  You have a profile onto **new Posit Connect** and create an **API KEY. See section 13.1.4.2.2 API key**
+
+### **Migration of apps using Method C - Github URL link**
+
+#### Migration of Apps (For R and Python)
+
+Assuming you have your project pushed to Github, follow the next steps
+
+1.  Copy to clipboard the url link
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_1.png") 
+
+```
+
+2.  Choose Import from Git from Publish button
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_2.png")
+```
+
+3.  Add the Git repository URL into the box
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_3.png")
+```
+
+5.  Check list is good. Click Next
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_4.png")
+```
+
+6.  Choose which branch, for more branches click down arrow and you'll be able to see all the branches from github. I have the main branch
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_5.png")
+```
+
+7.  I do not have manifest.json file therefore cannot migrate the app and will follow the 8th step. If you do have manifest.json file then app should be migrated on new Connect - just as seen in the 9th step.
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/git_migration_quarto_6.png")
+```
+
+8.  ::: panel-tabset
+    ## For R apps
+
+    a\. open RStudio and install rsconnect. Restart session for the changes to occur.
+
+    b\. within the console run the command bellow.
+
+    ``` r
+    rsconnect::writeManifest()
+    ```
+
+    ## For Python apps
+
+    If manifest.json file isn't available, then:
+
+    a.  open the Python on whatever IDE you've worked on
+
+    b.  open the terminal
+
+    c.  navigate to your project folder
+
+    d.  make sure you have the right Python version on which app was developed and right version of libraries.
+
+    Make sure you have everything needed for the manifest.json to be written, otherwise some issues may come up during the publishing.
+
+    e.  in the terminal we need to write the manifest json depending on the type of app you have. I will showcase for mainstream ones but for more info check the following link - <https://docs.posit.co/rsconnect-python/commands/write-manifest/>
+    f.  after writing the manifest.json make sure you push to github the new file and restart the process of publishing onto new Connect.
+
+    Press next tabs to copy code for writing the manifest.json files for different python products.
+
+    ## Quarto - Python
+
+    Open terminal. Make sure you are within your project for the bellow code to work. Otherwise, run second command according to the pattern shown in the code, by replacing OPTIONS AND DIRECTORY with your own Directory
+
+    ``` python
+    rsconnect write-manifest quarto ./
+    ```
+
+    ``` python
+    write-manifest quarto [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Shiny - Python
+
+    ``` python
+    write-manifest shiny [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Streamlit - Python
+
+    ``` python
+    write-manifest streamlit [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Bokeh - Pyton
+
+    ``` python
+    write-manifest bokeh [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Flask - Python
+
+    ``` python
+    write-manifest flask [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Dash - Python
+
+    ``` python
+    write-manifest dash [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Notebook
+
+    ``` python
+    write-manifest notebook [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+
+    ## Api - Python
+
+    ``` python
+    write-manifest api [OPTIONS] DIRECTORY [EXTRA_FILES]...
+    ```
+    :::
+
+9.  And indeed, after I have written the manifest.json file, the app was migrated on the new Connect as it can be seen in the picture bellow.
+
+```{r, echo=FALSE, out.width = '100%'}
+
+knitr::include_graphics("images/git_migration_quarto_7.png")
+```
+
+### Migration of app using Method E download-upload bundle
+
+1.  Access the old Connect where the app is - [https://dap-prd2-connect.azure.defra.cloud](https://dap-prd2-connect.azure.defra.cloud/)
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/migration_bundle_1.png", dpi = NA )
+```
+
+2.  Press Download. This is a tar file - this might need to be unzipped and zipped to a non-tar file again.
+
+```{r, echo=FALSE, out.width = '200%'}
+
+
+knitr::include_graphics("images/migration_bundle_2.png", dpi = NA)
+```
+
+3.  Open RStudio and press File to upload. Choose the zipped file not the tar file.
+
+```{r, echo=FALSE, out.width = '200%'}
+
+knitr::include_graphics("images/migration_bundle_3.png",  dpi = NA)
+```
+
+After you have finished the above steps, go to section **13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python** to finish the migration of your app.

@@ -1,0 +1,22 @@
+project:
+  type: book
+  output-dir: docs
+  
+book: 
+  title: "Posit Service Wrapper - For more details see Dash Playbook"
+  date: today
+  repo-url: https://github.com/gabrielburceadefra/posit_wrapper.git
+  favicon: images/dash_logo_colour.png
+  chapters:
+   - part: index.md
+   - part: Posit
+     chapters: 
+        - posit_connect.qmd
+        - workbench.qmd
+        - packagemanager.qmd
+    
+format:
+  html:
+    theme: cosmo
+    code-link: true
+    code-overflow: wrap

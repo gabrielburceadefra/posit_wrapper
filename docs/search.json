@@ -1,0 +1,35 @@
+[
+  {
+    "objectID": "packagemanager.html",
+    "href": "packagemanager.html",
+    "title": "3  Package Manager",
+    "section": "",
+    "text": "3.1 Introduction - What is Package Manager\nPosit Package Manager provides a secure, reliable, and scalable way to distribute and manage R and Python packages across Dash.\nBuilt-in vulnerability reporting and management bolsters your security and compliance efforts. Posit Package Manager provide an air-gapped source of CRAN, PyPI, and other packages for high-security environments.",
+    "crumbs": [
+      "Posit",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Package Manager</span>"
+    ]
+  },
+  {
+    "objectID": "packagemanager.html#what-can-package-manager-do",
+    "href": "packagemanager.html#what-can-package-manager-do",
+    "title": "3  Package Manager",
+    "section": "3.2 What can Package Manager do?",
+    "text": "3.2 What can Package Manager do?\nIn context of Dash, Package Manager can do the following:\n\nSearch and install packages from CRAN, PyPI, and Bioconductor and even from Github - will showcase each bellow\nMirror public repositories inside your own firewall, even offline\nAdd your own internal packages and binaries\nImprove security by blocking high-risk and unwanted packages\n\nThe list isn’t exhaustive for what Package Manager is able to achieve. For example curating subsets of CRAN and PyPI into custom repositories is something that can be done. Yet, we haven’t curated a list of libraries so that we allow users to download freely without any obstacles the desired libraries into their own environments. This is an advantage since a lot of libraries get updated.\nFurthermore, if there is a library the presents high-risk for Dash platform, this is flagged in Package Manager and cannot be downloaded into your own environment.",
+    "crumbs": [
+      "Posit",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Package Manager</span>"
+    ]
+  },
+  {
+    "objectID": "packagemanager.html#how-to-search-libraries-and-install-packages",
+    "href": "packagemanager.html#how-to-search-libraries-and-install-packages",
+    "title": "3  Package Manager",
+    "section": "3.3 How to search libraries and install packages?",
+    "text": "3.3 How to search libraries and install packages?\nOpen the link: https://dash-pkmgr-prd.azure.defra.cloud/\nIf selecting the down arrow, you’ll be able to see the repositories where libraries can be found.\n\n\n\n\n\n\n\n\n\n\n3.3.1 Searching for cran libraries and installation\nSearching for dplyr library when choosing cran repository shows the way to install, any metadata and security issues. If there are no security issues / vulnerabilities then installation into R environment will show no problems. Copy the code and go in RStudio IDE on Workbench and paste it into the console for installation to take effect.\n\n\n\n\n\n\n\n\n\n\n\n3.3.2 Searching for pyp libraries and installation\nSearching for pandas library when choosing pyp repository shows the way to install, any metadata and security issues. If there are no security issues / vulnerabilities then installation into Python environment will show no problems. Copy the code and go into IDE of your choice,on Workbench where Python can be accessed, and paste it into terminal for installation to take effect.\n\n\n\n\n\n\n\n\n\n\n\n3.3.3 Searching for bioconductor libraries and installation\nSearching for a4 library when choosing bioconductor repository shows the way to install, any metadata and security issues. If there are no security issues / vulnerabilities then installation into R environment will show no problems. Copy the code and go in RStudio IDE on Workbench and paste it into the console for installation to take effect.\n\n\n\n\n\n\n\n\n\n\n\n3.3.4 Searching for libraries on github and installation\nSearching for sdg library when choosing git-python repository shows the way to install, any metadata and security issues. If there are no security issues / vulnerabilities then installation into Python environment will show no problems. Copy the code and go into IDE of your choice,on Workbench where Python can be accessed, and paste it into terminal for installation to take effect.",
+    "crumbs": [
+      "Posit",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Package Manager</span>"
+    ]
+  }
+]
