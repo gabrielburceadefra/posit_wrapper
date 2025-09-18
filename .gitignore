@@ -8,4 +8,4 @@ connect_migration_doc.Rproj
 /.quarto/
 .Rprofile
 
-.docs
+/docs
