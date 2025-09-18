@@ -271,7 +271,7 @@ pip install quarto
 ```
 :::
 
-## Installing rsconnect
+Installing rsconnect
 
 You will have to install "rsconnect" to publish a dashboard.
 
