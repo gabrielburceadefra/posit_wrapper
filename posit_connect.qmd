@@ -797,8 +797,6 @@ a)  ::: callout-note
     If you app is based on updated data in Databricks, **VS Code on Workbench is the perfect IDE to be used in this instance. JupyterLab isn't configured with Databricks.**
     :::
 
-### 
-
 #### Method D: Project migration on Workbench -\> Actual migration
 
 **Using Workbench.** This method requires **first a transfer of the whole app project** onto Workbench - see steps here **18.8 Migration of projects to Workbench**. After migrating your app to Workbench then follow the migration just as documented at sections **13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python**. This method advantage is you have all your your files transferred (alongside migration task) onto Workbench which is the new server from now onwards.
