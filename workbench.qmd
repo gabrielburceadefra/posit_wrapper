@@ -2,32 +2,27 @@
 
 Posit Workbench within Dash, delivers RStudio, JupyterLab and VS Code IDE and Jupyter. all in one place. It gives data teams the IDEs they love, and IT the control and governance needed for secure, compliant work.
 
-## Tutorials
-
-### Accessing RStudio
+## RStudio on Workbench
 
 1.  Login into Dash Workbench - <https://dash-workbench-dev.azure.defra.cloud/>
 
 2.  A Single Sign On will come up. It will recognize your profile, yet if prompted to add your credentials then do it.
 
     ```{r  echo=FALSE, out.width = '100%'}
-
     knitr::include_graphics("images/rst_1.png")
     ```
 
     ```{r echo=FALSE, out.width = '100%'}
-
     knitr::include_graphics("images/rst_2.png")
     ```
 
 3.  This will open RStudio Pro. If you work with Databricks then select the Databricks tab underneath RStudio under Session Credentials.
 
     ```{r echo=FALSE, out.width = '100%'}
-
     knitr::include_graphics("images/rst_3.png")
     ```
 
-#### Username characters warning
+Username characters warning
 
 Apostrophes and non-ASCII characters cannot be used in RStudio usernames; i.e. if your username is `dara.óbriain@defra.gov.uk` or `bobby.o'brien@defra.gov.uk`, it will not work. Please contact [dashplatformsupport\@defra.gov.uk](mailto:dashplatformsupport@defra.gov.uk) for help.
 
@@ -40,13 +35,12 @@ To sign out of RStudio on the DASH Platform, click on the **Sign out** icon next
 If you click on the orange **Quit current R session** icon also at the top right, you will close the current session, including clearing your console and environment.Quitting RStudio
 
 ```{r, echo=FALSE, out.width = '100%'}
-
 knitr::include_graphics("images/rst_4.png")
 ```
 
-## Working with data {#rstudio-data}
+### Working with data
 
-### R Studio workspace
+#### RStudio workspace
 
 When working in RStudio on the DASH Platform it is possible to upload files directly into your RStudio workspace through the upload button in the Files pane. This should only be used to load un-restricted data items. Your personal workspace in RStudio, including code, files, and data, should be treated as transient since this may be cleared if the cluster is restarted (which happens periodically to refresh the configuration).
 
@@ -58,7 +52,7 @@ Any code or documentation should be backed up in a GitHub repository, see [GitHu
 It is important that you **back up any files** you keep in your DASH Platform R workspace, and the recommendation is to do so using GitHub to host your code and outputs. You can also export file to your local machine. Otherwise **you may lose your work** if there is a restart of the RStudio cluster. Save any data in your folder in the lab zone as detailed in the [data lake chapter](datalake.qmd#lab-zone).
 :::
 
-### Backing up your workspace
+#### Backing up your workspace
 
 Whenever the RStudio cluster you are using is restarted, all your files are wiped from your RStudio workspace. We will let you know ahead of scheduled cluster restarts, but it is also possible that the cluster needs to be restarted unexpectedly.
 
@@ -66,14 +60,12 @@ Therefore you need to back up your work on a regular basis. The recommended way 
 
 If you can't back up your files via GitHub, it is also possible to download scripts and outputs such as figures to your local machine.
 
--   On the right hand side under Files, select the files you want to download to your local machine\
--   Click on More \> Export...\
--   Rename the files if required, then click **Download**\
+-   On the right hand side under Files, select the files you want to download to your local machine
+-   Click on More \> Export...
+-   Rename the files if required, then click **Download**
 -   The files will appear in your **Downloads** folder on your local machine
 
-### Working with data
-
-**Read data from Unity Catalog**
+#### **Read data from Databricks**
 
 There are several ways to read data from Databricks. One is through brickster library and the other is through sparklyr library. I will showcase each bellow.
 
@@ -88,23 +80,17 @@ To read Volume data from Databricks from Unity Catalog first check if you have a
 As I have access to data and want to read volume data, I run the code in R file in RStudio
 
 ``` r
-library(brickster)
- 
-# read a volume, change the path
-file <- db_volume_read(
-  '/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/penguins.csv',
-  tempfile(),
-  perform_request = TRUE)
- 
-penguins <- read.csv(file)
-x    <- penguins$body_mass_g
-print(x)
- 
-gentoo <- subset(penguins, species == "Gentoo")
+library(brickster)   
+# read a volume, change the path 
+file <- db_volume_read('/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/penguins.csv', tempfile(), perform_request = TRUE)   
+
+penguins <- read.csv(file) 
+
+x <- penguins$body_mass_g 
+print(x)   
+
+gentoo <- subset(penguins, species == "Gentoo") 
 print(gentoo)
- 
-gentoo <- subset(penguins, species == "Gentoo")
- 
 ```
 
 And to save data do the bellow into RStudio work space
@@ -116,11 +102,7 @@ write.csv(gentoo,"gentoo.csv", row.names = FALSE)
 If you want to save the gentoo data back to Volume but distinct from penguin.csv from which was derived then do this:
 
 ``` r
-db_volume_write(
-  '/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/gentoo.csv',
-  'gentoo.csv',
-  overwrite = TRUE,
-  perform_request = TRUE)
+db_volume_write('/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/gentoo.csv','gentoo.csv', overwrite = TRUE, perform_request = TRUE)
 ```
 
 **Reading data with sparklyr** (see link <https://www.databricks.com/glossary/sparklyr> ).
@@ -130,74 +112,60 @@ Before reading the data, first we need to connect to Databricks.
 1.  First login into Workspace and select RStudio and select Databricks
 
 ```{r  echo=FALSE, out.width = '100%'}
-
-knitr::include_graphics("images/databricks_connection_1.png")
-
-
-
+knitr::include_graphics("images/databricks_connection_1.png")   
 ```
 
-2. Now you're signed in. On the right hand side, you need to see a tab - Databricks - and see the clusters. I have 4 of them. This means there is no need for any credentials, RStudio does that for you. Now you want to make your way to data.
+2.  Now you're signed in. On the right hand side, you need to see a tab - Databricks - and see the clusters. I have 4 of them. This means there is no need for any credentials, RStudio does that for you. Now you want to make your way to data.
 
 ```{r  echo=FALSE, out.width = '100%'}
-
-knitr::include_graphics("images/databricks_connection_2.png")
-
+knitr::include_graphics("images/databricks_connection_2.png") 
 ```
 
 3.  Read data by passing the Cluster id into spark_connect function and also the version. Copy the code bellow and replace the parameters with the ones you get once logged in.
 
 ```{r  echo=FALSE, out.width = '100%'}
-
 knitr::include_graphics("images/databricks_connection_3.png")
 ```
 
 ``` r
-library(sparklyr)
-library(pysparklyr)
-
-# Use an all purpose cluster
+library(sparklyr) 
+library(pysparklyr)  
+# Use an all purpose cluster 
 sc <- spark_connect(
   cluster_id = "0717-160441-e0z99iuh",
-  method = "databricks_connect", 
-  version = "17.0"
-)
+  method = "databricks_connect",
+  version = "17.0" )
 ```
 
 4.  The other way to is to use serveless cluster, where there is no need to add any cluster ID as this is managed for you already.
 
 ``` r
-# Use serverless cluster -
-library(sparklyr)
-library(pysparklyr)
-
-sc <- spark_connect(
-  serverless = TRUE,
-  method = "databricks_connect", 
-  version = "15.4"
-)
+# Use serverless cluster - 
+library(sparklyr) 
+library(pysparklyr)  
+sc <- spark_connect(   
+  serverless = TRUE,   
+  method = "databricks_connect",    
+  version = "15.4" )
 ```
 
 As you've made your way to the clusters now we need to read data
 
 ``` r
-# Set the database where the table is located
-database_name <- "shared_external_volume"
-
-# Use spark_read_table() function to read the table
+# Set the database where the table is located 
+database_name <- "shared_external_volume"  
+# Use spark_read_table() function to read the table 
 data_tbl <- spark_read_table(sc, in_database(database_name, "gentoo.csv"))
 ```
 
-## FAQs
+#### FAQs
 
-### R version
+#### R version
 
 There are multiple versions of R=("4.4.2" "4.4.0" "4.3.2" "4.3.1" "4.3.0" "4.2.2") . To check versions of R press down arrow and you should see the versions.
 
 ```{r  echo=FALSE, out.width = '100%'}
-
-
-knitr::include_graphics("images/wrkbnch_rstudio_versions.png")
+knitr::include_graphics("images/workbench_rstudio_versions.png")
 ```
 
 ## Visual Code on Workbench
@@ -207,16 +175,134 @@ VS Code on Workbench integrated with Databricks simplifies authentification proc
 Select VS Code and select Databricks connection under Session Credentials.
 
 ```{r echo=FALSE, out.width = '100%'}
-
 knitr::include_graphics("images/workbench_vscode_1.png") 
 ```
 
 As you can see on the right hand side in the corner there is a Databricks connection setup for you.
 
 ```{r echo=FALSE, out.width = '100%'}
-
-knitr::include_graphics("images/workbench_vscode_2.png") 
+knitr::include_graphics("images/workbench_vscode_2.png")
 ```
+
+### Installing Extension
+
+VS Code on Workbench does allow for extensions to be installed but with a caveat. You need to configure first the Application proxy SSL in order to be able to achieve the installations. Follow the steps bellow:
+
+1.  Go to **Settings** -\> **Remote\[dash-workbench-prd-azure.defra.cloud\]**
+2.  Search for **SSL**
+3.  Choose **Application** -\> **Proxy** and un-thick the box for **Http: Proxy Strict SSL.**
+
+```{r  echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_extensions.png")
+```
+
+An example using SQL database installation:
+
+Go to Extensions and search for Sql you should be able to install and use sql database.
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_extensions_installing_sql.png")
+```
+
+### Version Control (Git)
+
+If you haven't authorised VS Code with Git, then it is necessary to follow the next steps so that in the future you won't need to configure it. Follow the steps bellow.
+
+1.  Go to Explorer -\> Clone Repository
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_1.png") 
+```
+
+2.  Press Allow
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_2.png")
+```
+
+3.  A code to Copy will show up -\> Copy and Continue to Github
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_3.png")
+```
+
+4.  You have to be logged into Github first. Press Open.
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_4.png")
+```
+
+5.  Copy the one time code to paste into next window
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_5.png")
+```
+
+6.Paste the code. If you cannot , go back and copy again the code and follow the same.
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_6.png")
+```
+
+7.  Scroll down and Authorise Visual Code
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_7.png")
+```
+
+8.  Now go back to Visual Code and you should be able to see all the repositories you own on Github.
+
+```{r echo=FALSE, out.width = '100%'}
+knitr::include_graphics("images/vs_code_git_8.png")
+```
+
+### Installing python libraries
+
+**Python libraries** in VS Code can be installed. Dash has configured **Package Manager** where the libraries would be installed from.
+
+Package manager provides a secure, reliable, and scalable way to distribute and manage Python packages across Dash. Check the Package Manager section for more information. Check the section within Dash Playbook bellow or navigate to [Dash Package Manager](https://dash-pkmgr-prd.azure.defra.cloud).
+
+##### How to install python libaries?
+
+Yet, it is important to work with virtual environments, within your project folder when installing libraries. Otherwise you'll get error when attempting to achieve this task. For example you'll get the following error relating to asking your admin:
+
+``` python
+ pip install pandas     
+  Command 'pip' not found, but can be installed with:     
+  apt install python3-pip     
+  Please ask your administrator.
+ 
+```
+
+##### Steps in setting up virtual environments
+
+Open a terminal within VS Code on Workbench and follow the steps bellow.
+
+1.  Create a virtual environment
+
+``` python
+python3 -m venv venv
+```
+
+2.  Activate the virtual environment
+
+    ``` python
+    source venv/bin/activate
+    ```
+
+3.  Install the libraries needed using pip
+
+    ``` python
+    pip install rsconnect
+    ```
+
+    or if you have a txt file with the versions of the libraries you might need,then use the bellow command
+
+    ``` python
+    pip install -r requirements.txt 
+    ```
+
+If you get an error in installing any library from python, then copy the library and version you get error, and check it within Package Manager . You might get some information as to why you aren't able to get the installation complete.
 
 ### Working with data in VS Code
 
@@ -231,53 +317,51 @@ To read Volume data from Databricks from Unity Catalog first check if you have a
 As I have access to data and want to read volume data, and transform it into pandas data frame will use this as a case study. However, in workspace client there is no need to add the HOST and Token variables as this was already done automatically for you.
 
 ``` python
-# Import required packages  
-import pandas as pd 
-from databricks.sdk 
-import WorkspaceClient from io import BytesIO 
-
-# Set up workspace connection 
-w = WorkspaceClient() 
-
-# Read file from UNity catalog volume 
-response = w.files.download("/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/penguins.csv")
-
-downloaded_file = response.contents.read()
-
-# Read downloaded file to Pandas dataframe. 
-df = pd.read_csv(BytesIO(downloaded_file))
-
-# Open file to upload 
-adelie = df[df['species'] == 'Adelie']
-
-adelie.to_csv("/tmp/adelie.csv", index=False)
+# Import required packages   
+import pandas as pd  
+from databricks.sdk  
+import WorkspaceClient from io import BytesIO   
+# Set up workspace connection  
+w = WorkspaceClient()   
+# Read file from UNity catalog volume  
+response = w.files.download("/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/penguins.csv")  
+downloaded_file = response.contents.read()  
+# Read downloaded file to Pandas dataframe.  
+df = pd.read_csv(BytesIO(downloaded_file))  
+# Open file to upload  
+adelie = df[df['species'] == 'Adelie']  adelie.to_csv("/tmp/adelie.csv", index=False)
 ```
 
 You can also write file to Unity Catalog Volume
 
 ``` python
-# Write file to Unity Catalog Volume  
-
-with open("/tmp/adelie.csv", "rb") as f:     
-  csv = f.read() 
-  
+# Write file to Unity Catalog Volume    
+with open("/tmp/adelie.csv", "rb") as f: csv = f.read()     
 w.files.upload("/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/adelie.csv", csv)
 ```
 
-## Migration of projects to Workbench
+# Migration of projects to Workbench
+
+### R project migration
 
 There are two methods for migrating projects from different old IDE's to Workbench
+
+### Methods in project migration
+
+#### Method A Export and Upload
 
 a\. By **Exporting** the project folder from RStudio (Databricks) and **Uploading** the zipped by choosing '**Choose File'** into RStudio Workbench.
 
 ```{r echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/rstudio_export_upload.png")
+knitr::include_graphics("images/rstudio_export_upload.png") 
 
 ```
 
 b\. By using **Version Control - Github**. For this you need to have Github handle. See bellow steps for **Steps in R projects migration** and **Steps in Python project migration**
 
-### Steps in R projects migration
+#### Version Control Method
+
+Steps to follow:
 
 1.  If you have Version Control (Github) set up on your project, jump straight to Step 13 within this page. If you did not have Version Control applied to the projects in RStudio then it is necessary to create a New Repository using the [Defra Data Science Centre of Excellence GitHub](https://github.com/Defra-Data-Science-Centre-of-Excellence).
 
@@ -323,17 +407,20 @@ knitr::include_graphics("images/rprojmigrtation_8.png")
 
 ```{r , echo=FALSE, out.width = '100%'}
 knitr::include_graphics("images/rprojmigrtation_8a.png")
+                                                             
 ```
 
 8.  Add the link obtained above into Repository URL
 
 ```{r , echo=FALSE, out.width = '100%'}
+
 knitr::include_graphics("images/rprojmigrtation_9.png")
 ```
 
 9.  Choose the R Version your project was developed in. The R Version will depend on the [Databricks Runtime](https://docs.databricks.com/aws/en/release-notes/runtime/). You can find out the version by typing `version` in the console.
 
 ```{r , echo=FALSE, out.width = '100%'}
+
 knitr::include_graphics("images/rprojmigrtation_10.png")
 ```
 
@@ -396,7 +483,6 @@ knitr::include_graphics("images/rprojmigrtation_21.png")
 16. Choose Version Control
 
 ```{r, echo=FALSE, out.width = '100%'}
-
 knitr::include_graphics("images/rprojmigrtation_22.png")
 ```
 
@@ -424,12 +510,12 @@ knitr::include_graphics("images/rprojmigrtation_25.png")
 knitr::include_graphics("images/rprojmigrtation_27.png")
 ```
 
-### Steps in Python project migration
+### Python project migration
 
 1.  If you have Version Control (Github) set up on your project, go to Step 16 for the actual project to be pulled into Posit Workbench. If you do not have a Version Control functionality applied to the python projects then it is necessary to create a New Repository under <https://github.com/Defra-Data-Science-Centre-of-Excellence.>
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_1.png") 
+knitr::include_graphics("images/projmigr_vscode_1.png")
 ```
 
 2.  Give an intuitive unique name to the new repo. Make sure the new repo is ticked as Internal (within 'Choose visibility' section).
@@ -441,7 +527,7 @@ knitr::include_graphics("images/projmigr_vscode_2.png")
 3.  Press Create repository
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_3.png") 
+knitr::include_graphics("images/projmigr_vscode_3.png")
 ```
 
 4.  And the repo is created under Defra-Data-Science-Centre-Of-Excellence project <!--#  -->
@@ -521,94 +607,94 @@ knitr::include_graphics("images/projmigr_vscode_17.png")
 ```
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_18.png")  
+knitr::include_graphics("images/projmigr_vscode_18.png")
 ```
 
 15. As the project is now on Github, go to Workbench <https://dash-workbench-dev.azure.defra.cloud/> and pull the project into the new workspace.
 16. Open the VS Code.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_19.png") 
+knitr::include_graphics("images/projmigr_vscode_19.png")
 ```
 
 17. Choose Initialise Repository.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_20.png") 
+knitr::include_graphics("images/projmigr_vscode_20.png")
 ```
 
 18. A new window comes up and choose allow.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_21.png") 
+knitr::include_graphics("images/projmigr_vscode_21.png")
 ```
 
 19. Copy the code and Certificate to Github
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_22.png") 
+knitr::include_graphics("images/projmigr_vscode_22.png")
 ```
 
-20. Press Open and as signed into Github a Device Activation will come up.
+20. Press Open and as signed into Github a Device Activation will come up.0
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_23.png") 
+knitr::include_graphics("images/projmigr_vscode_23.png")
 ```
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_24.png") 
+knitr::include_graphics("images/projmigr_vscode_24.png")
 ```
 
 21. Paste the code you've copied above.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_25.png") 
+knitr::include_graphics("images/projmigr_vscode_25.png")
 ```
 
 22. Choose Clone repository
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_26.png") 
+knitr::include_graphics("images/projmigr_vscode_26.png")
 ```
 
 23. A new tab 'The extension Github wants to sign in Github' should come up. Choose allow.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_28.png") 
+knitr::include_graphics("images/projmigr_vscode_28.png")
 ```
 
 24. Press Authorise Visual-Studio-Code.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_29.png") 
+knitr::include_graphics("images/projmigr_vscode_29.png")
 ```
 
 25. GitHub will ask for Authentication through the autheticator app.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_30.png") 
+knitr::include_graphics("images/projmigr_vscode_30.png")
 ```
 
 26. A confirmation in format as bellow should come up. Now you can use VSCode within Workbench to apply Git Version control functionality to your projects.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_31.png") 
+knitr::include_graphics("images/projmigr_vscode_31.png")
 ```
 
 27. If still signed into Github (which you will since the above has confirmed the configuration) choose the project to be cloned into Workbench.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_7.png") 
+knitr::include_graphics("images/projmigr_vscode_7.png")
 ```
 
 28. And tick the box trust the authors.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_32.png") 
+knitr::include_graphics("images/projmigr_vscode_32.png")
 ```
 
 29. Open the cloned repository. After opening, you should see migrated project within workbench.
 
 ```{r , echo=FALSE, out.width = '100%'}
-knitr::include_graphics("images/projmigr_vscode_33.png") 
+knitr::include_graphics("images/projmigr_vscode_33.png")
 ```
