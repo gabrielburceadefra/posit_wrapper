@@ -901,6 +901,8 @@ knitr::include_graphics("images/git_migration_quarto_6.png")
     f.  after writing the manifest.json make sure you push to github the new file and restart the process of publishing onto new Connect.
 
     Press next tabs to copy code for writing the manifest.json files for different python products.
+    
+
 
     ## Quarto - Python
 
