@@ -387,11 +387,11 @@ with open("/tmp/adelie.csv", "rb") as f:
 w.files.upload("/Volumes/tst1_dash_lab/soundscapes_restricted/shared_external_volume/adelie.csv", csv)
 ```
 
-# Migration of projects to Workbench
+# Migration of code/files/projects to Workbench
 
 ### R project migration
 
-There are two methods for migrating projects from different old IDE's to Workbench
+There are two methods for migrating codes and associated files / projects from different old IDE's to Workbench
 
 #### Methods in project migration
 
