@@ -81,7 +81,7 @@ The below process will use the example Shiny dashboard in RStudio. The same proc
 
 There is a 2GB limit to the size of dashboards that can be published on the Posit server.
 
-First access RStudio from Dash Platform on Databricks / Workbench (here is the link for new server where RStudio sits - <https://dash-workbench-prd.azure.defra.cloud/> - which will replace the RStudio within Databricks).
+First access RStudio from Dash Platform on Databricks / Workbench (link to be provided at mid-end of October as licenses will be made available by then) which will replace the RStudio within Databricks).
 
 On Workbench choose RStudio Pro, and check the Session Credential tab if you read data from Databricks.
 
