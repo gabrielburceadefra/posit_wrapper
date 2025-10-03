@@ -1,10 +1,10 @@
-## Package Manager
+# Package Manager
 
 ## Introduction - What is Package Manager
 
 Posit Package Manager provides a secure, reliable, and scalable way to distribute and manage R and Python packages across Dash.
 
-In a nutshell, when wanting to **install libraries**, you can just do it through your console and l**ibraries are fetch through package manager** from **cran, pyp, bioconductor even from Github !!**, without needing to go through individual repository on internet. All in one package!
+In a nutshell, when wanting to **install libraries**, you can just do it through your console and **libraries are fetch through package manager from cran, pyp, bioconductor even from Github !!**, without needing to go through individual repository on internet. All in one package!
 
 ## What can Package Manager do?
 

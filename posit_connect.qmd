@@ -167,7 +167,7 @@ knitr::include_graphics("images/rdashboard_8.png", dpi = NA)
 
 ##### Publish Dashboard
 
-You''ll be able to see now that you can publish from your account as this was set it for you. Now click **Publish.** If this screen appears just click **Try Again.**
+You'll be able to see now that you can publish from your account as this was set it for you. Now click **Publish.** If this screen appears just click **Try Again.**
 
 ```{r, echo = FALSE, out.width = '200%'}
 
@@ -753,18 +753,28 @@ Please see the tutorial on dashboard admin to apply settings to your dashboard.
 
 ## Migration of Apps from old Posit Connect to New Posit Connect
 
-The present guideline purpose is to aide the migration of R & Python projects from old RStudio / VSCode (on Databricks) or other IDE's used, to new RStudio VSCode within Workbench.
+The present guideline purpose is to aide the migration of R & Python apps from old Connect server to the new Connect Server.
+
+The **new Connect Server**, where all apps need to be migrated to is found at this link - <https://dash-connect-prd.azure.defra.cloud/>.
+
+Make sure you **create an API** Key the new Connect server so that you'll be able to migrate your app. See [API key] on how to get one.
+
+The **old Connect server** is found at this link - <https://dap-prd2-connect.azure.defra.cloud/>.
+
+The old Connect server will be decommissioned at a certain point in time, therefore, it is important that all the apps are migrated from old connect server to the new connect server within the month of October.
 
 ### Methods for migration of apps
 
 There are several methods to migrate your app from old Connect to the new Connect.
 
-I will add summary of the migration approaches. But it is important to read in detail bellow what entails each method. That way you won't face any issues in the process of migration.
+This is a summary table of five methods of migration.The best methods for **fast migration are the first three methods,** with low and medium complexity, the last **two are high complexity** with advantages for each method - see [Decision tree]. **Method E** approach is available only at mid-end of October month (2025), as licences for Workbench would be available then. Therefore, if method E is your choice for migration, then wait until mid-end of October.
 
 ```{r, echo=FALSE, out.width = '200%'}
 
 knitr::include_graphics("images/summary_table_migration.png") 
 ```
+
+##### Decision tree
 
 Decision tree helps you with choosing which migration fits your need.
 
@@ -773,43 +783,132 @@ Decision tree helps you with choosing which migration fits your need.
 knitr::include_graphics("images/decision_tree_migration.png") 
 ```
 
-#### Method A: Direct Deployment from IDE
+#### Method A: Direct Deployment from your current IDE
 
-**From RStudio in Databricks and Python VS Code publishing onto new Connect**. See section bellow on relevant steps 13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python. I would suggest you should go with this method first unless you also want to used the Method D - migrate the entire project onto Workbench and then migrating your app onto new Connect.
+**This method assumes you are RStudio in Databricks and Python VS Code but with a small different you publish onto new Connect server** rather the old one. See section bellow on relevant steps [Publishing from RStudio] and [Publishing from Python].
+
+You need an API key to be created within [new Connect Server](https://dash-connect-prd.azure.defra.cloud/). See here [API key] how to create an API key.
 
 #### Method B - Github URL link
 
-**Using Github URL link** to publish onto Connect; this has the advantage of not needing to open any R / Python and IDE. See section **13.5.3 Migration of apps using Github url link**
+**Using Github URL link** to publish onto new Connect; this has the advantage of not needing to open any R / Python and IDE.
+
+You need an API key to be created within [new Connect Server](https://dash-connect-prd.azure.defra.cloud/). See here [API key] how to create an API key.
 
 ::: callout-caution
-This method implies you have manifest.json already pushed to Github. For more see Step 8 from section **13.5.3 Migration of apps using Github url link**
+This method implies you have manifest.json already pushed to your repository onto Github. If you do not have this file follow section [Writing Manifest json in R and Python]
 :::
 
-#### Method C - Download - Upload bundle
+**Steps**
 
-And last method, **downloading the bundle from old Connect, then uploading it onto any IDE (RStudio/VS Code) or Workbench** followed by steps recorded at sections 13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python. The advantage of this method is that if your project isn't any more onto your local environment then you can reproduce the same environment within the choice of your IDE.
+Assuming you have your project pushed to Github, follow the next steps
 
-a)  ::: callout-note
-    My advice is **upload the bundle straight into Workbench**, either within RStudio or VS Code and download all the needed libraries and versions of the app. Test the app works the way is intended and then migrate it.
+1.  Copy to clipboard the url link
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_1.png")  
+```
+
+2.  Choose Import from Git from Publish button
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_2.png")
+```
+
+3.  Add the Git repository URL into the box
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_3.png")
+```
+
+5.  Check list is good. Click Next
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_4.png")
+```
+
+6.  Choose which branch, for more branches click down arrow and you'll be able to see all the branches from github. I have the main branch
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_5.png")
+```
+
+7.  I do not have manifest.json file therefore cannot migrate the app and will follow the 8th step. If you do have manifest.json file then app should be migrated on new Connect. If you do not have manifest.json follow the steps here - [Writing Manifest json in R and Python]
+
+```{r, echo=FALSE, out.width = '200%'}
+knitr::include_graphics("images/git_migration_quarto_6.png")
+```
+
+8.  The app was migrated on the new Connect as it can be seen in the picture bellow.
+
+```{r, echo=FALSE, out.width = '100%'}
+
+knitr::include_graphics("images/git_migration_quarto_7.png")
+
+```
+
+#### **Method C - Promote function**
+
+You need an API key to be created within [new Connect Server](https://dash-connect-prd.azure.defra.cloud/). See here [API key] how to create an API key.
+
+**Steps**
+
+For this method you need to have:
+
+**A. 2 api keys**: from the old connect and from new connect (have them at hand)
+
+**B. the 2 URL's**, the new and old connect servers:
+
+1.  is the old connect server - <https://dap-prd2-connect.azure.defra.cloud/>
+2.  and here is the new connect server - [https://dash-connect-prd.azure.defra.cloud](https://dash-connect-prd.azure.defra.cloud/connect)/
+
+**C. the name of the app** from the old connect server - this needs to be added into the code.
+
+Also you need to install connectapi library within your RStudio session and pass all the parameters needed to it. Copy the code bellow with:
+
+``` r
+# Need to pin to 0.7.0 due to breaking change for version of Connect on old server.
+require(remotes)
+install_version("connectapi", version = "0.7.0")
+
+library(connectapi)
+
+promote('https://dap-prd2-connect.azure.defra.cloud/', 'https://dash-connect-prd.azure.defra.cloud/', 'new_connectserver_api_key','old_connectserver_api_key', '<name>')
+```
+
+#### Method D - Download - Upload bundle
+
+This method might apply well to those apps where users left Defra. The apps are in the supervision of others users. The advantage of this method is that the download of the bundle from old Connect server and uploading it within your IDE, allows you to reproduce the same environment of the app.
+
+You need an API key to be created within [new Connect Server](https://dash-connect-prd.azure.defra.cloud/). See here [API key] how to create an API key.
+
+**Steps**
+
+1.  Go to old connect **-** <https://dap-prd2-connect.azure.defra.cloud/>
+
+2.  Go onto your app amd download the bundle. Just like in the picture
+
+    ```{r, echo=FALSE, out.width = '200%'}
+    knitr::include_graphics("images/download_bundle.png", dpi = NA )
+    ```
+
+3.  Upload it onto any IDE (RStudio/VS Code) or Workbench
+
+4.  For next steps, follow sections [Publishing from RStudio] & [Publishing from Python].
+
+    ::: callout-tip
+    A note of advice is **upload the bundle straight into Workbench**, either within RStudio or VS Code and download all the needed libraries and versions of the app. Test the app works the way is intended and then migrate it.
     :::
 
     ::: callout-caution
-    If you app is based on updated data in Databricks, **VS Code on Workbench is the perfect IDE to be used in this instance. JupyterLab isn't configured with Databricks.**
+    If your app is based on updated data in Databricks, **VS Code on Workbench is the perfect IDE to be used in this instance. JupyterLab isn't configured with Databricks.**
     :::
 
-#### Method D: Project migration on Workbench -\> Actual migration
+#### Method E: Full project migration via Workbench
 
-**Using Workbench.** This method requires **first a transfer of the whole app project** onto Workbench - see steps here **18.8 Migration of projects to Workbench**. After migrating your app to Workbench then follow the migration just as documented at sections **13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python**. This method advantage is you have all your your files transferred (alongside migration task) onto Workbench which is the new server from now onwards.
+This method requires **first a transfer of the whole code and files** onto Workbench - see steps here [Migration-of-projects-to-workbench](#migration-of-projects-to-workbench){#migration-of-projects-to-workbench} within section Posit Workbench. After you have migrated your code and all the files to Workbench follow the migration just as documented at sections [Publishing from RStudio] & [Publishing from Python] . This method advantage is you have all your your files transferred alongside migration task onto new Connect.
 
-### Assumptions
-
-1.  Depending on the migration method you choose, Dash users might need to have a Defra github account.The project should be added opened within - <https://github.com/Defra-Data-Science-Centre-of-Excellence> repository.
-
-2.  If you choose the last method of migration, then at the point of migration make sure you have access to the new workbench (the new link <https://dash-workbench-dev.azure.defra.cloud)> where multiple IDE's are sitting, including RStudio/ VSCode / JupyterLab.
-
-3.  Users need to be within AVD to be able to undertake the tasks needed for deployment.
-
-4.  Within the Posit Workbench make sure you select the R & Python versions as the same as within the original environment. Otherwise, the code has to be re-factored with the newer versions of R provided. The same applies to Python and Quarto.
+Within the Posit Workbench make sure you select the R & Python versions as the same as within the original environment. Otherwise, the code has to be re-factored with the newer versions of R provided. The same applies to Python and Quarto.
 
 ::: callout-note
 The versions of each software in the new environment are:
@@ -821,173 +920,115 @@ The versions of each software in the new environment are:
 -   Quarto ="1.7.31" "1.6.42" "1.5.54"
 :::
 
-5.  You have a profile onto **new Posit Connect** and create an **API KEY. See section 13.1.4.2.2 API key**
+You need an API key to be created within [new Connect Server](https://dash-connect-prd.azure.defra.cloud/). See here [API key] how to create an API key.
 
-### **Migration of apps using Method C - Github URL link**
-
-#### Migration of Apps (For R and Python)
-
-Assuming you have your project pushed to Github, follow the next steps
-
-1.  Copy to clipboard the url link
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_1.png") 
-
-```
-
-2.  Choose Import from Git from Publish button
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_2.png")
-```
-
-3.  Add the Git repository URL into the box
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_3.png")
-```
-
-5.  Check list is good. Click Next
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_4.png")
-```
-
-6.  Choose which branch, for more branches click down arrow and you'll be able to see all the branches from github. I have the main branch
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_5.png")
-```
-
-7.  I do not have manifest.json file therefore cannot migrate the app and will follow the 8th step. If you do have manifest.json file then app should be migrated on new Connect - just as seen in the 9th step.
-
-```{r, echo=FALSE, out.width = '200%'}
-
-knitr::include_graphics("images/git_migration_quarto_6.png")
-```
-
-8.  ::: panel-tabset
-    ## For R apps
-
-    a\. open RStudio and install rsconnect. Restart session for the changes to occur.
-
-    b\. within the console run the command bellow.
-
-    ``` r
-    rsconnect::writeManifest()
-    ```
-
-    ## For Python apps
-
-    If manifest.json file isn't available, then:
-
-    a.  open the Python on whatever IDE you've worked on
-
-    b.  open the terminal
-
-    c.  navigate to your project folder
-
-    d.  make sure you have the right Python version on which app was developed and right version of libraries.
-
-    Make sure you have everything needed for the manifest.json to be written, otherwise some issues may come up during the publishing.
-
-    e.  in the terminal we need to write the manifest json depending on the type of app you have. I will showcase for mainstream ones but for more info check the following link - <https://docs.posit.co/rsconnect-python/commands/write-manifest/>
-    f.  after writing the manifest.json make sure you push to github the new file and restart the process of publishing onto new Connect.
-
-    Press next tabs to copy code for writing the manifest.json files for different python products.
-    
-
-
-    ## Quarto - Python
-
-    Open terminal. Make sure you are within your project for the bellow code to work. Otherwise, run second command according to the pattern shown in the code, by replacing OPTIONS AND DIRECTORY with your own Directory
-
-    ``` python
-    rsconnect write-manifest quarto ./
-    ```
-
-    ``` python
-    write-manifest quarto [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Shiny - Python
-
-    ``` python
-    write-manifest shiny [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Streamlit - Python
-
-    ``` python
-    write-manifest streamlit [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Bokeh - Pyton
-
-    ``` python
-    write-manifest bokeh [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Flask - Python
-
-    ``` python
-    write-manifest flask [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Dash - Python
-
-    ``` python
-    write-manifest dash [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Notebook
-
-    ``` python
-    write-manifest notebook [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-
-    ## Api - Python
-
-    ``` python
-    write-manifest api [OPTIONS] DIRECTORY [EXTRA_FILES]...
-    ```
-    :::
-
-9.  And indeed, after I have written the manifest.json file, the app was migrated on the new Connect as it can be seen in the picture bellow.
-
-```{r, echo=FALSE, out.width = '100%'}
-
-knitr::include_graphics("images/git_migration_quarto_7.png")
-```
-
-### Migration of app using Method E download-upload bundle
+**Steps**
 
 1.  Access the old Connect where the app is - [https://dap-prd2-connect.azure.defra.cloud](https://dap-prd2-connect.azure.defra.cloud/)
 
 ```{r, echo=FALSE, out.width = '200%'}
-
 knitr::include_graphics("images/migration_bundle_1.png", dpi = NA )
 ```
 
 2.  Press Download. This is a tar file - this might need to be unzipped and zipped to a non-tar file again.
 
 ```{r, echo=FALSE, out.width = '200%'}
-
-
 knitr::include_graphics("images/migration_bundle_2.png", dpi = NA)
 ```
 
 3.  Open RStudio and press File to upload. Choose the zipped file not the tar file.
 
 ```{r, echo=FALSE, out.width = '200%'}
-
 knitr::include_graphics("images/migration_bundle_3.png",  dpi = NA)
 ```
 
-After you have finished the above steps, go to section **13.1.4.1 Publishing from RStudio and 13.1.4.2 Publishing from Python** to finish the migration of your app.
+After you have finished the above steps, go to section [Publishing from RStudio] and [Publishing from Python] to finish the migration of your app.
+
+#### Writing Manifest json in R and Python
+
+::: panel-tabset
+## For R apps
+
+a\. open RStudio and install rsconnect. Restart session for the changes to occur.
+
+b\. within the console run the command bellow.
+
+``` r
+rsconnect::writeManifest()
+```
+
+## For Python apps
+
+If manifest.json file isn't available, then:
+
+a.  open the Python on whatever IDE you've worked on
+
+b.  open the terminal
+
+c.  navigate to your project folder
+
+d.  make sure you have the right Python version on which app was developed and right version of libraries.
+
+Make sure you have everything needed for the manifest.json to be written, otherwise some issues may come up during the publishing.
+
+e.  in the terminal we need to write the manifest json depending on the type of app you have. I will showcase for mainstream ones but for more info check the following link - <https://docs.posit.co/rsconnect-python/commands/write-manifest/>
+f.  after writing the manifest.json make sure you push to github the new file and restart the process of publishing onto new Connect.
+
+Press next tabs to copy code for writing the manifest.json files for different python products.
+:::
+
+::: panel-tabset
+## Quarto - Python
+
+Open terminal. Make sure you are within your project for the bellow code to work. Otherwise, run second command according to the pattern shown in the code, by replacing OPTIONS AND DIRECTORY with your own Directory
+
+``` python
+rsconnect write-manifest quarto ./
+```
+
+``` python
+write-manifest quarto [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Shiny - Python
+
+``` python
+write-manifest shiny [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Streamlit - Python
+
+``` python
+write-manifest streamlit [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Bokeh - Pyton
+
+``` python
+write-manifest bokeh [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Flask - Python
+
+``` python
+write-manifest flask [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Dash - Python
+
+``` python
+write-manifest dash [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Notebook
+
+``` python
+write-manifest notebook [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+
+## Api - Python
+
+``` python
+write-manifest api [OPTIONS] DIRECTORY [EXTRA_FILES]...
+```
+:::
