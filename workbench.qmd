@@ -4,7 +4,7 @@ Posit Workbench within Dash, delivers RStudio, JupyterLab and VS Code IDE and Ju
 
 ## RStudio on Workbench
 
-1.  Login into Dash Workbench - <https://dash-workbench-dev.azure.defra.cloud/>
+1.  Login into Dash Workbench - to be provided mid-end of October
 
 2.  A Single Sign On will come up. It will recognize your profile, yet if prompted to add your credentials then do it.
 
@@ -509,7 +509,7 @@ Press Push button under Git tab. Then navigate to Github repo and check if all t
 knitr::include_graphics("images/rprojmigrtation_16.png")
 ```
 
-13. Open the [Workbench](https://dash-workbench-dev.azure.defra.cloud) .Select RStudio -\> Start Session to open RStudio IDE.
+13. Open the Workbench - to be provided on mid-end of October. Select RStudio -\> Start Session to open RStudio IDE.
 
 ```{r, echo=FALSE, out.width = '100%'}
 knitr::include_graphics("images/rprojmigrtation_19a.png")
@@ -596,7 +596,7 @@ knitr::include_graphics("images/projmigr_vscode_5.png")
 knitr::include_graphics("images/projmigr_vscode_6.png")
 ```
 
-7.  If you are signed into Github, then it will automatically recognise the repositories created by you just as below. Choose the repo you have created above.
+7.  If you are signed into Github, then it will automatically recognize the repositories created by you just as below. Choose the repo you have created above.
 
 ```{r , echo=FALSE, out.width = '100%'}
 knitr::include_graphics("images/projmigr_vscode_7.png")
@@ -658,7 +658,7 @@ knitr::include_graphics("images/projmigr_vscode_17.png")
 knitr::include_graphics("images/projmigr_vscode_18.png")  
 ```
 
-15. As the project is now on Github, go to Workbench <https://dash-workbench-dev.azure.defra.cloud/> and pull the project into the new workspace.
+15. As the project is now on Github, go to Workbench - to be provided on mid-end of October - and pull the project into the new workspace.
 16. Open the VS Code.
 
 ```{r , echo=FALSE, out.width = '100%'}
