@@ -1,10 +1,9 @@
 ## Welcome
 
-The present book is to guide Dash users in how to make the best use of Posit Workbench, Connect and Package Manager. 
-The resource is just a sample of the book and purposed only for certain users that are testing the Posit items. 
-More importantly, this isn't a final sample, I have to change certain pictures to make it clearer for the user. 
-Thus, please bear with me until I get everything sorted. 
+The present book focus is to aid Dash users on migration of Apps from old Connect server to the new Connect server. You will see some similarities with Dash Playbook and other sections not related to migration. The reason for additional resources is to aide users on other needs apart from migration.
 
-Please do not make the resource available to anyone yet as this sections would be added to Dash Playbook. 
+Yet the section for Apps/Dashboards migration is found [Migration of Apps from old Posit Connect to New Posit Connect](#migration-of-apps-from-old-posit-connect-to-new-posit-connect "Migration of Apps from old Posit Connect to New Posit Connect"){#migration-of-apps-from-old-posit-connect-to-new-posit-connect}
 
-If any parts of the sections aren't clear, please do get in contact with me - Gabriel Burcea-Ting, via teams. :) 
+Please do not make the resource available to anyone yet as this sections would be added to Dash Playbook.
+
+If any parts of the sections aren't clear, please do get in contact with me - Gabriel Burcea-Ting, via teams.
